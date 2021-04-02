@@ -252,7 +252,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
                     "Zendesk Internals are undefined -- did you forget to call RNZendeskModule.init(<account_key>)?");
             return;
         }
-        setVisitorInfo(options);
+        //setVisitorInfo(options);
 
         ReadableMap flagHash = RNZendeskChatModule.getReadableMap(options, "behaviorFlags", "startChat");
         boolean showPreChatForm = getBooleanOrDefault(flagHash, "showPreChatForm", "startChat(behaviorFlags)", true);
@@ -281,5 +281,5 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             Log.e(TAG, "Could not load getCurrentActivity -- no UI can be displayed without it.");
         }
     }
-    
+
 }
