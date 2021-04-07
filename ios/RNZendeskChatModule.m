@@ -38,7 +38,7 @@ ZDKChatAPIConfiguration *_visitorAPIConfig;
 
 RCT_EXPORT_MODULE(RNZendeskChatModule);
 
-/*RCT_EXPORT_METHOD(setVisitorInfo:(NSDictionary *)options) {
+RCT_EXPORT_METHOD(setVisitorInfo:(NSDictionary *)options) {
 	if (!NSThread.isMainThread) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self setVisitorInfo:options];
@@ -56,13 +56,14 @@ RCT_EXPORT_MODULE(RNZendeskChatModule);
 	if (options[@"tags"]) {
 		config.tags = options[@"tags"];
 	}
-	config.visitorInfo = [[ZDKVisitorInfo alloc] initWithName:options[@"name"]
+	/*config.visitorInfo = [[ZDKVisitorInfo alloc] initWithName:options[@"name"]
 														email:options[@"email"]
-												  phoneNumber:options[@"phone"]];
+												  phoneNumber:options[@"phone"]];*/
 
-	NSLog(@"[RNZendeskChatModule] Applied visitor info: department: %@ tags: %@, email: %@, name: %@, phone: %@", config.department, config.tags, config.visitorInfo.email, config.visitorInfo.name, config.visitorInfo.phoneNumber);
+
+    NSLog(@"[RNZendeskChatModule] Applied visitor info: department: %@ tags: %@, email: %@, name: %@, phone: %@", config.department, config.tags, config.visitorInfo.email, config.visitorInfo.name, config.visitorInfo.phoneNumber);
 	return config;
-}*/
+}
 
 #define RNZDKConfigHashErrorLog(options, what)\
 if (!!options) {\
@@ -147,8 +148,8 @@ RCT_EXPORT_METHOD(startChat:(NSDictionary *)options) {
 
 	dispatch_sync(dispatch_get_main_queue(), ^{
 
-		/*ZDKChat.instance.configuration = [self applyVisitorInfo:options
-													 intoConfig: _visitorAPIConfig ?: [[ZDKChatAPIConfiguration alloc] init]];*/
+		ZDKChat.instance.configuration = [self applyVisitorInfo:options
+													 intoConfig: _visitorAPIConfig ?: [[ZDKChatAPIConfiguration alloc] init]];
 
 		ZDKChatConfiguration * chatConfig = [self chatConfigurationFromConfig:options];
 
