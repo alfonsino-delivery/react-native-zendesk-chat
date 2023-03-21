@@ -1,4 +1,4 @@
-declare module "react-native-zendesk-chat" {
+declare module "@alfonsino-delivery/react-native-zendesk-chat" {
 	interface VisitorInfoOptions {
 		name?: string;
 		email?: string;
@@ -9,12 +9,14 @@ declare module "react-native-zendesk-chat" {
 		/** Set this to set the bot's displayName */
 		botName?: string;
 	}
+
 	interface MessagingOptions_iOS extends MessagingOptionsCommon {
 		/** Will be loaded using [UIImage imageWithName:…] ) */
 		botAvatarName?: string;
 		/** Will be loaded using [UIImage imageWithData:[NSData dataWithContentsOfUrl:…]] */
 		botAvatarUrl?: string;
 	}
+
 	interface MessagingOptions_Android extends MessagingOptionsCommon {
 		/** Will be loaded from your native asset resources */
 		botAvatarDrawableId?: number;
