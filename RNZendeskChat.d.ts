@@ -1,4 +1,4 @@
-declare module "@alfonsino-delivery/react-native-zendesk-chat" {
+declare module "react-native-zendesk-chat" {
 	interface VisitorInfoOptions {
 		name?: string;
 		email?: string;
