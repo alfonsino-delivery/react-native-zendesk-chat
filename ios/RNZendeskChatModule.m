@@ -51,7 +51,7 @@ RCT_EXPORT_METHOD(setVisitorInfo:(NSDictionary *)options) {
 
 - (ZDKChatAPIConfiguration*)applyVisitorInfo:(NSDictionary*)options intoConfig:(ZDKChatAPIConfiguration*)config {
 	if (options[@"department"]) {
-		config.department = options[@"department"];
+        config.departmentName = options[@"department"];
 	}
 	if (options[@"tags"]) {
 		config.tags = options[@"tags"];
@@ -61,7 +61,7 @@ RCT_EXPORT_METHOD(setVisitorInfo:(NSDictionary *)options) {
 												  phoneNumber:options[@"phone"]];*/
 
 
-    NSLog(@"[RNZendeskChatModule] Applied visitor info: department: %@ tags: %@, email: %@, name: %@, phone: %@", config.department, config.tags, config.visitorInfo.email, config.visitorInfo.name, config.visitorInfo.phoneNumber);
+    NSLog(@"[RNZendeskChatModule] Applied visitor info: department: %@ tags: %@, email: %@, name: %@, phone: %@", config.departmentName, config.tags, config.visitorInfo.email, config.visitorInfo.name, config.visitorInfo.phoneNumber);
 	return config;
 }
 
@@ -70,8 +70,8 @@ if (!!options) {\
 	NSLog(@"[RNZendeskChatModule] Invalid %@ -- expected a config hash", what);\
 }
 
-- (ZDKMessagingConfiguration *)messagingConfigurationFromConfig:(NSDictionary*)options {
-	ZDKMessagingConfiguration *config = [[ZDKMessagingConfiguration alloc] init];
+- (ZDKClassicMessagingConfiguration *)messagingConfigurationFromConfig:(NSDictionary*)options {
+    ZDKClassicMessagingConfiguration *config = [[ZDKClassicMessagingConfiguration alloc] init];
 	if (!options || ![options isKindOfClass:NSDictionary.class]) {
 		RNZDKConfigHashErrorLog(options, @"MessagingConfiguration config options");
 		return config;
@@ -162,9 +162,9 @@ RCT_EXPORT_METHOD(startChat:(NSDictionary *)options) {
 			return;
 		}
 
-		ZDKMessagingConfiguration *messagingConfig = [self messagingConfigurationFromConfig: options[@"messagingOptions"]];
+        ZDKClassicMessagingConfiguration *messagingConfig = [self messagingConfigurationFromConfig: options[@"messagingOptions"]];
 
-		UIViewController *viewController = [ZDKMessaging.instance buildUIWithEngines:engines
+		UIViewController *viewController = [ZDKClassicMessaging.instance buildUIWithEngines:engines
 																 configs:@[chatConfig, messagingConfig]
 																   error:&error];
 		if (!!error) {
