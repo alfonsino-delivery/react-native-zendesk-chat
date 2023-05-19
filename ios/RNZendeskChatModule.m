@@ -51,7 +51,7 @@ RCT_EXPORT_METHOD(setVisitorInfo:(NSDictionary *)options) {
 
 - (ZDKChatAPIConfiguration*)applyVisitorInfo:(NSDictionary*)options intoConfig:(ZDKChatAPIConfiguration*)config {
 	if (options[@"department"]) {
-        config.departmentName = options[@"department"];
+		config.departmentName = options[@"department"];
 	}
 	if (options[@"tags"]) {
 		config.tags = options[@"tags"];
@@ -61,7 +61,7 @@ RCT_EXPORT_METHOD(setVisitorInfo:(NSDictionary *)options) {
 												  phoneNumber:options[@"phone"]];*/
 
 
-    NSLog(@"[RNZendeskChatModule] Applied visitor info: department: %@ tags: %@, email: %@, name: %@, phone: %@", config.departmentName, config.tags, config.visitorInfo.email, config.visitorInfo.name, config.visitorInfo.phoneNumber);
+    NSLog(@"[RNZendeskChatModule] Applied visitor info: departmentName: %@ tags: %@, email: %@, name: %@, phone: %@", config.departmentName, config.tags, config.visitorInfo.email, config.visitorInfo.name, config.visitorInfo.phoneNumber);
 	return config;
 }
 
