@@ -2,34 +2,43 @@
 
 @implementation ZDKJWTAuth
 
--(void)setUrl:(NSString *)urlString{
-    AlfUrl=urlString;
+- (void)setUrl:(NSString *)urlString withToken:(NSString *)accessToken {
+    getUrl = urlString;
+    token = accessToken;
 }
 
-- (void)getToken:(void (^ _Nonnull)(NSString * _Nullable, NSError * _Nullable))completion {
-    NSError *error;
+- (void)getToken:(void (^)(NSString * _Nullable, NSError * _Nullable))completion {
+    NSURL *url = [NSURL URLWithString:getUrl];
 
-    NSURL *url = [NSURL URLWithString:AlfUrl];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
-
-    [request setURL:url];
-
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    if (token.length) {
+        NSString *authorizationHeader = [NSString stringWithFormat:@"Bearer %@", token];
+        [request addValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
+    }
 
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
 
-    NSData *postData = NULL;
+        NSError *jsonError;
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
 
-    [request setHTTPBody:postData];
-
-    NSData *finalDataToDisplay = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
-
-    NSMutableDictionary *abc = [NSJSONSerialization JSONObjectWithData: finalDataToDisplay
-                                                               options: NSJSONReadingMutableContainers
-                                                                error: &error];
-    completion(abc[@"jwt"],NULL);
+        if (jsonError) {
+            completion(nil, jsonError);
+        } else {
+            NSString *jwt = jsonDict[@"jwt"];
+            completion(jwt, nil);
+        }
+    }];
+    
+    [dataTask resume];
 }
 
 @end
+

@@ -186,10 +186,10 @@ RCT_EXPORT_METHOD(startChat:(NSDictionary *)options) {
 	[RCTPresentedViewController() dismissViewControllerAnimated:YES completion:nil];
 }
 
-RCT_EXPORT_METHOD(init:(NSString *)zenDeskKey appId:(NSString *)appId) {
+RCT_EXPORT_METHOD(init:(NSString *)zenDeskKey appId:(NSString *) appId accessToken:(NSString *)accessToken) {
 		[ZDKChat initializeWithAccountKey:zenDeskKey queue:dispatch_get_main_queue()];
     ZDKJWTAuth *authenticator = [ZDKJWTAuth new];
-    [authenticator setUrl:appId];
+    [authenticator setUrl:appId withToken:accessToken];
     [ZDKChat.instance setIdentityWithAuthenticator:authenticator];
 }
 

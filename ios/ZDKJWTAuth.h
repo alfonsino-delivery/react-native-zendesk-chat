@@ -5,10 +5,11 @@
 @interface ZDKJWTAuth: NSObject<ZDKJWTAuthenticator>
 
 {
-    NSString *AlfUrl;
+    NSString *getUrl;
+    NSString *token;
 }
 
-- (void)setUrl:(NSString *_Nullable) urlString;
+- (void)setUrl:(NSString *_Nullable)urlString withToken:(NSString *_Nullable)accessToken;
 - (void)getToken:(void (^ _Nonnull)(NSString * _Nullable, NSError * _Nullable))completion;
 
 @end
