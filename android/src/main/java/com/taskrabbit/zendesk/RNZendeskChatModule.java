@@ -17,15 +17,11 @@ import zendesk.chat.JwtAuthenticator;
 import zendesk.chat.ProfileProvider;
 import zendesk.chat.PreChatFormFieldStatus;
 import zendesk.chat.ChatEngine;
-import zendesk.chat.PushNotificationsProvider;
 import zendesk.chat.VisitorInfo;
-import zendesk.core.JwtIdentity;
-import zendesk.core.Zendesk;
-import zendesk.messaging.MessagingActivity;
-import zendesk.messaging.MessagingConfiguration;
+import zendesk.classic.messaging.MessagingActivity;
+import zendesk.classic.messaging.MessagingConfiguration;
 import java.lang.String;
 import java.util.ArrayList;
-import zendesk.core.Identity;
 
 public class RNZendeskChatModule extends ReactContextBaseJavaModule {
     private static final String TAG = "[RNZendeskChatModule]";
