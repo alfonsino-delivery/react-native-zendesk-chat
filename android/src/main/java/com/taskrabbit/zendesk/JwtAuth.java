@@ -30,14 +30,17 @@ class JwtAuth implements JwtAuthenticator {
 
         RequestBody body = RequestBody.create(JSON, "{}");
 
-
-        Request.Builder requestBuilder = new Request.Builder()
-                .url(getUrl)
-                .post(body);
-
+        Request.Builder requestBuilder;
         if (token != null && token.length() > 1) {
             // Add the token as Authorization Bearer in the header
+            requestBuilder = new Request.Builder()
+                .url(getUrl)
+                .get();
             requestBuilder.addHeader("Authorization", "Bearer " + token);
+        } else {
+            requestBuilder = new Request.Builder()
+                .url(getUrl)
+                .post(body);
         }
 
         Request request = requestBuilder.build();

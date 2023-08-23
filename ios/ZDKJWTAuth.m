@@ -11,12 +11,15 @@
     NSURL *url = [NSURL URLWithString:getUrl];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    [request setHTTPMethod:@"POST"];
+
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     if (token.length) {
+        [request setHTTPMethod:@"GET"];
         NSString *authorizationHeader = [NSString stringWithFormat:@"Bearer %@", token];
         [request addValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
+    } else {
+        [request setHTTPMethod:@"POST"];
     }
 
     NSURLSession *session = [NSURLSession sharedSession];
