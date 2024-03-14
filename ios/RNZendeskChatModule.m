@@ -172,12 +172,23 @@ RCT_EXPORT_METHOD(startChat:(NSDictionary *)options) {
 			return;
 		}
 
-		viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: options[@"localizedDismissButtonTitle"] ?: @"Close"
-																						   style: UIBarButtonItemStylePlain
-																						  target: self
-																						  action: @selector(dismissChatUI)];
+        // Create a UIBarButtonItem with a system back arrow icon
+        UIImage *backArrowImage = [[UIImage systemImageNamed:@"xmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:backArrowImage
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(dismissChatUI)];
 
+        // Set the tint color of the back arrow icon to black
+        [backBarButtonItem setImage:[[backBarButtonItem image] imageWithTintColor:[UIColor blackColor]]];
+
+        // Set the back bar button item for the view controller's navigation item
+        viewController.navigationItem.leftBarButtonItem = backBarButtonItem;
+
+		// Present full screen modal
 		UINavigationController *chatController = [[UINavigationController alloc] initWithRootViewController: viewController];
+		[chatController setModalPresentationStyle: UIModalPresentationFullScreen];
 		[RCTPresentedViewController() presentViewController:chatController animated:YES completion:nil];
 	});
 }
