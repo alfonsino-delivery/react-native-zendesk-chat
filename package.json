@@ -22,8 +22,8 @@
 		"android",
 		"react-component"
 	],
-	"homepage": "https://github.com/taskrabbit/react-native-zendesk-chat.git",
-	"bugs": "https://github.com/taskrabbit/react-native-zendesk-chat/issues",
+	"homepage": "https://github.com/alfonsino-delivery/react-native-zendesk-chat.git",
+	"bugs": "https://github.com/alfonsino-delivery/react-native-zendesk-chat/issues",
 	"author": "jrichardlai",
 	"contributors": [
 		"Brian Leonard <brian@taskrabbit.com>",
