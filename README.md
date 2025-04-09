@@ -103,7 +103,7 @@ If you're on iOS < 0.60, you may need to manually install the cocoapod:
 Add a reference to your Podfile:
 
 ```Podfile
-pod 'RNZendeskChat', :git => 'https://github.com/taskrabbit/react-native-zendesk-chat.git'
+pod 'RNZendeskChat', :git => 'https://github.com/alfonsino-delivery/react-native-zendesk-chat.git'
 ```
 
 then run pod install: `(cd ios; pod install)`

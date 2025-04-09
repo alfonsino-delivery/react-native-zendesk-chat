@@ -88,7 +88,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = TaskRabbit;
+				ORGANIZATIONNAME = AlfonsinoDelivery;
 				TargetAttributes = {
 					B6462EBE1C603E340010294B = {
 						CreatedOnToolsVersion = 7.2;
